@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function getAllProducts() {
   try {
     let response = await fetch(
-      "https://restaurant.stepprojects.ge/api/Products/GetAll"
+      "https://restaurant.stepprojects.ge/api/Products/GetAll",
     );
 
     if (!response.ok) {
@@ -58,7 +58,7 @@ async function getAllProducts() {
 async function getCart() {
   try {
     let response = await fetch(
-      "https://restaurant.stepprojects.ge/api/Baskets/GetAll"
+      "https://restaurant.stepprojects.ge/api/Baskets/GetAll",
     );
 
     if (!response.ok) {
@@ -71,7 +71,6 @@ async function getCart() {
 
     let totalPrice = 0;
 
- 
     for (let item of data) {
       totalPrice += item.price * item.quantity;
     }
@@ -108,7 +107,6 @@ async function getCart() {
       `;
     }
 
-
     document.querySelectorAll(".remove-from-cart").forEach((btn) => {
       btn.addEventListener("click", async () => {
         let id = Number(btn.dataset.id);
@@ -116,7 +114,6 @@ async function getCart() {
       });
     });
 
-  
     const orderBtn = document.getElementById("order-now");
     if (orderBtn) {
       orderBtn.addEventListener("click", () => {
@@ -124,7 +121,6 @@ async function getCart() {
         cart.innerHTML = "<h4>Your cart is empty</h4>";
       });
     }
-
   } catch (error) {
     console.error(error);
   }
@@ -146,7 +142,7 @@ async function addToCart(productId, productPrice) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newProduct),
-      }
+      },
     );
 
     if (!response.ok) {
@@ -156,7 +152,6 @@ async function addToCart(productId, productPrice) {
     if (cart) {
       await getCart();
     }
-
   } catch (error) {
     console.error(error);
   }
@@ -168,7 +163,7 @@ async function removeFromCart(productId) {
       `https://restaurant.stepprojects.ge/api/Baskets/DeleteProduct/${productId}`,
       {
         method: "DELETE",
-      }
+      },
     );
 
     if (!response.ok) {
