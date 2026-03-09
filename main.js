@@ -22,12 +22,16 @@ async function getAllProducts() {
     }
 
     let data = await response.json();
+    let basketResponse = await fetch("https://restaurant.stepprojects.ge/api/Baskets/GetAll");
+    let basketData = await basketResponse.json();
+    let basketIds = basketData.map(item => item.product.id);
 
     cardsContainer.innerHTML = "";
 
     for (let product of data) {
+      let isInCart = basketIds.includes(product.id);
       cardsContainer.innerHTML += `
-        <div class="card">
+        <div class="card" id="product-${product.id}">
           <img src="${product.image}" class="card-img-top" alt="${product.name}">
           <div class="card-body">
             <h5 class="card-title">${product.name}</h5>
@@ -35,8 +39,8 @@ async function getAllProducts() {
             <p class="card-text">Spiciness: ${product.spiciness}</p>
             <p class="card-text">Nuts: ${product.nuts ? "Yes" : "No"}</p>
             <p class="card-text">Vegetarian: ${product.vegeterian ? "Yes" : "No"}</p>
-            <button class="btn btn-success add-to-cart" data-id="${product.id}">
-              Add to cart
+            <button class="btn btn-success add-to-cart ${isInCart ? 'in-cart-btn' : ''}" data-id="${product.id}">
+              ${isInCart ? 'In Cart' : 'Add to cart'}
             </button>
           </div>
         </div>
@@ -48,6 +52,9 @@ async function getAllProducts() {
         let id = Number(btn.dataset.id);
         let product = data.find((item) => item.id === id);
         await addToCart(id, product.price);
+        
+        btn.classList.add('in-cart-btn');
+        btn.textContent = 'In Cart';
       });
     });
   } catch (error) {
@@ -116,9 +123,14 @@ async function getCart() {
 
     const orderBtn = document.getElementById("order-now");
     if (orderBtn) {
-      orderBtn.addEventListener("click", () => {
+      orderBtn.addEventListener("click", async () => {
+        for (let item of data) {
+          await fetch(`https://restaurant.stepprojects.ge/api/Baskets/DeleteProduct/${item.product.id}`, {
+            method: "DELETE",
+          });
+        }
         alert("Successfully ordered!");
-        cart.innerHTML = "<h4>Your cart is empty</h4>";
+        await getCart();
       });
     }
   } catch (error) {
@@ -170,8 +182,44 @@ async function removeFromCart(productId) {
       throw new Error("Request failed!");
     }
 
+    const btn = document.querySelector(`.add-to-cart[data-id="${productId}"]`);
+    if (btn) {
+      btn.classList.remove('in-cart-btn');
+      btn.textContent = 'Add to cart';
+    }
+    
     await getCart();
   } catch (error) {
     console.error(error);
   }
+}
+
+
+const playlist = [
+  "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", 
+  "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", 
+  "https://www.chosic.com/wp-content/uploads/2021/04/The-Grand-Succession-Chinese-Background-Music.mp3",
+  "https://www.chosic.com/wp-content/uploads/2021/04/Lotus-Flower-Chinese-Background-Music.mp3",
+  "https://www.chosic.com/wp-content/uploads/2021/04/Chinese-New-Year-Traditional-Chinese-Music.mp3",
+  "https://www.chosic.com/wp-content/uploads/2021/04/Bamboo-Forest-Chinese-Background-Music.mp3",
+  "https://www.chosic.com/wp-content/uploads/2021/04/The-Great-Wall-Traditional-Chinese-Music.mp3",
+  "https://www.chosic.com/wp-content/uploads/2021/04/Cherry-Blossoms-Traditional-Chinese-Music.mp3",
+  "https://www.chosic.com/wp-content/uploads/2021/04/Tea-Ceremony-Traditional-Chinese-Music.mp3",
+  "https://www.chosic.com/wp-content/uploads/2021/04/Mountain-Temple-Traditional-Chinese-Music.mp3"
+];
+
+let currentAudio = new Audio();
+const musicBtn = document.getElementById("play-random-music");
+
+if (musicBtn) {
+  musicBtn.addEventListener("click", () => {
+    let randomIndex = Math.floor(Math.random() * playlist.length);
+    
+    currentAudio.pause();
+    currentAudio.src = playlist[randomIndex];
+    
+    currentAudio.play().catch(error => {
+      console.warn("Playback error. Check your internet connection:", playlist[randomIndex]);
+    });
+  });
 }

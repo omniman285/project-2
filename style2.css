@@ -103,3 +103,197 @@ a:hover {
   height: 30px;
   background-color: rgba(170, 23, 23, 0.589);
 }
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 120px;
+  background-color: #8b0000;
+  color: tomato;
+  gap: 20px;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.balls, .moreball {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.ball,
+.ball1,
+.ball2,
+.ball3,
+.ball4,
+.ball5,
+.ball6,
+.ball7,
+.ball8,
+.ball9,
+.ball10,
+.ball11,
+.ball12,
+.ball13,
+.ball14,
+.ball15,
+.ball16,
+.ball17,
+.ball18,
+.ball19,
+.ball20,
+.ball21,
+.ball22,
+.ball23,
+.ball24,
+.ball25,
+.ball26,
+.ball27,
+.ball28,
+.ball29,
+.ball30,
+.ball31,
+.ball32,
+.ball33,
+.ball34,
+.ball35,
+.ball36,
+.ball37,
+.ball38,
+.ball39,
+.ball40,
+.ball41,
+.ball42,
+.ball43,
+.ball44,
+.ball45,
+.ball46,
+.ball47,
+.ball48,
+.ball49,
+.ball50,
+.ball51,.ball52,
+.ball53,.ball54,.ball55,.ball56,
+.ball57,.ball58,.ball59,.ball60,.ball61,.ball62,.ball63,.ball64,.ball65,.ball66,.ball67,.ball68,.ball69,.ball70,.ball71,.ball72,.ball73,.ball74,.ball75,.ball76,.ball77,.ball78,.ball79,.ball80,.ball81,.ball82,.ball83,.ball84,
+.ball85,.ball86,.ball87, .ball88,.ball89,.ball90,.ball91, .ball92,.ball93, .ball94, .ball95,  .ball96, .ball97, .ball98, .ball99, .ball100, .ball101, .ball102, .ball103, .ball104, .ball105, .ball106, .ball107, .ball108, .ball109, .ball110, .ball111, .ball112, .ball113, .ball114, .ball115, .ball116, .ball117, .ball118, .ball119, .ball120, .ball121, .ball122, .ball123, .ball124, .ball125, .ball126, .ball127, .ballq, .ballw, .balle, .ballr, .ballt, .balla, .balld, .ballf, .ballg, .ballh {
+  width: 55px;
+  height: 71px;
+}
+
+header h1 {
+  margin: 0;
+  text-align: center;
+}
+
+header nav ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  align-items: center;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: rgba(255, 139, 7, 0.801);
+}
+
+.cards,
+.cart {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  position: relative;
+  z-index: 10;
+}
+
+.welcome {
+  border: 2px solid;
+  width: 400px;
+  height: 600px;
+}
+
+.card-body {
+  background-color: rgba(170, 23, 23, 0.589);
+}
+
+.card {
+  background-color: rgba(218, 7, 7, 0.418);
+  position: relative;
+  z-index: 10;
+}
+
+.btn-primary,
+.add-to-cart {
+  background-color: rgba(255, 0, 0, 0.801);
+  border: none;
+}
+
+.add-to-cart.in-cart-btn {
+  background-color: white !important;
+  color: black !important;
+  border: 2px solid black !important;
+}
+
+.carts1,
+.homes1 {
+  text-decoration: none;
+  color: rgba(255, 139, 7, 0.801);
+}
+
+@keyframes waveBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-27px);
+  }
+}
+
+.ballq { animation: waveBounce 1s infinite ease-in-out; }
+.ballw { animation: waveBounce 1s infinite ease-in-out 0.1s; }
+.balle { animation: waveBounce 1s infinite ease-in-out 0.2s; }
+.ballr { animation: waveBounce 1s infinite ease-in-out 0.3s; }
+.ballt { animation: waveBounce 1s infinite ease-in-out 0.4s; }
+
+.balla { animation: waveBounce 1s infinite ease-in-out 0.5s; }
+.balld { animation: waveBounce 1s infinite ease-in-out 0.6s; }
+.ballf { animation: waveBounce 1s infinite ease-in-out 0.7s; }
+.ballg { animation: waveBounce 1s infinite ease-in-out 0.8s; }
+.ballh { animation: waveBounce 1s infinite ease-in-out 0.9s; }
+
+main {
+  position: relative;
+}
+
+.alotballs {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.music-btn {
+  background-color: rgb(231, 22, 22);
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.6s ease-in, color 0.6s ease-in;
+  cursor: pointer;
+  border: none;
+}
+
+.music-btn:hover {
+  background-color: rgb(255, 0, 0);
+  color: white;
+}
